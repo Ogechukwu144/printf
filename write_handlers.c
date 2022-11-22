@@ -39,7 +39,7 @@ int handle_write_char(char c, char buffer[],
 						write(1, &buffer[BUFF_SIZE - i - 1], width - 1));
 			else
 				return (write(1, &buffer[BUFF_SIZE - i - 1], width - 1) +
-						write(1, &bufrer[0], 1));
+						write(1, &buffer[0], 1));
 		}
 
 		return (write(1, &buffer[0], 1));
@@ -141,7 +141,7 @@ int write_num(int ind, char buffer[],
 }
 
 /**
- * write_unsigned - Writes an unsigned number
+ * write_unsgnd - Writes an unsigned number
  * @is_negative: Number indicating if the num is negative
  * @ind: Index at which the number starts in the buffer
  * @buffer: Array of chars
@@ -153,7 +153,7 @@ int write_num(int ind, char buffer[],
  * Return: Number of written chars.
  */
 
-int write_unsigned(int is_negative, int ind,
+int write_unsgnd(int is_negative, int ind,
 		char buffer[],
 		int flags, int width, int precision, int size)
 {
@@ -164,7 +164,7 @@ int write_unsigned(int is_negative, int ind,
 	UNUSED(is_negative);
 	UNUSED(size);
 
-	if (precision == 0 && ind == BIF_SIZE - 2 && buffer[ind] == '0')
+	if (precision == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
 		return (0); /* printf(".0d", 0) no char is printed */
 
 	if (precision > 0 && precision < length)
@@ -248,4 +248,3 @@ int write_pointer(char buffer[], int ind, int length,
 		buffer[--ind] = extra_c;
 	return (write(1, &buffer[ind], BUFF_SIZE - ind - 1));
 }
-
